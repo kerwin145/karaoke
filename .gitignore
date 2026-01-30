@@ -1,0 +1,5 @@
+# the mp4 movie tracks will be saved here
+tracks/*
+
+# output of demucs
+karaoke_output/* 
