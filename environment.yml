@@ -1,23 +1,24 @@
-name: karaoke
+name: karaoke_pro
 channels:
   - pytorch
   - nvidia
   - conda-forge
+  - defaults
   - https://repo.anaconda.com/pkgs/main
   - https://repo.anaconda.com/pkgs/r
   - https://repo.anaconda.com/pkgs/msys2
-  - defaults
 dependencies:
-  - backports.zstd=1.3.0=py310h458dff3_0
+  - aom=3.9.1=he0c23c2_0
   - blas=1.0=mkl
-  - brotli-python=1.2.0=py310hfff998d_1
+  - brotlicffi=1.2.0.0=py310h885b0b7_0
   - bzip2=1.0.8=h2bbff1b_6
   - ca-certificates=2026.1.4=h4c7d964_0
-  - cairo=1.18.4=h5782bbf_0
-  - certifi=2026.1.4=pyhd8ed1ab_0
-  - charset-normalizer=3.4.4=pyhd8ed1ab_0
-  - cuda-cccl=12.9.27=0
-  - cuda-cccl_win-64=12.9.27=0
+  - cairo=1.18.4=h477c42c_1
+  - certifi=2026.01.04=py310haa95532_0
+  - cffi=2.0.0=py310h02ab6af_1
+  - charset-normalizer=3.4.4=py310haa95532_0
+  - cuda-cccl=13.1.115=h415d894_0
+  - cuda-cccl_win-64=13.1.115=hc667259_0
   - cuda-cudart=12.4.127=0
   - cuda-cudart-dev=12.4.127=0
   - cuda-cupti=12.4.127=0
@@ -26,15 +27,15 @@ dependencies:
   - cuda-nvrtc=12.4.127=0
   - cuda-nvrtc-dev=12.4.127=0
   - cuda-nvtx=12.4.127=0
-  - cuda-opencl=12.9.19=0
-  - cuda-opencl-dev=12.9.19=0
-  - cuda-profiler-api=12.9.79=0
+  - cuda-opencl=13.1.115=hd7d98ca_0
+  - cuda-opencl-dev=13.1.115=hd7d98ca_0
+  - cuda-profiler-api=13.1.115=h415d894_0
   - cuda-runtime=12.4.1=0
-  - cuda-version=12.9=3
-  - double-conversion=3.3.1=he0c23c2_0
+  - cuda-version=13.1=hd92462c_3
+  - dav1d=1.2.1=hcfcfb64_0
   - expat=2.7.3=h885b0b7_4
-  - ffmpeg=4.3=ha925a31_0
-  - filelock=3.20.3=pyhd8ed1ab_0
+  - ffmpeg=7.1.0=gpl_hb26d62f_701
+  - filelock=3.20.3=py310haa95532_0
   - font-ttf-dejavu-sans-mono=2.37=hab24e00_0
   - font-ttf-inconsolata=3.000=h77eed37_0
   - font-ttf-source-code-pro=2.038=h77eed37_0
@@ -42,117 +43,109 @@ dependencies:
   - fontconfig=2.15.0=h765892d_1
   - fonts-conda-ecosystem=1=0
   - fonts-conda-forge=1=hc364b38_1
-  - freetype=2.14.1=h57928b3_0
+  - freetype=2.14.1=hfbffc0b_0
+  - giflib=5.2.2=h7edc060_0
+  - gmp=6.3.0=h537511b_0
+  - gmpy2=2.2.2=py310h8598115_0
   - graphite2=1.3.14=hac47afa_2
-  - h2=4.3.0=pyhcf101f3_0
-  - harfbuzz=11.0.0=h9e37d49_0
-  - hpack=4.1.0=pyhd8ed1ab_0
-  - hyperframe=6.1.0=pyhd8ed1ab_0
-  - icu=75.1=he0c23c2_0
-  - idna=3.11=pyhd8ed1ab_0
-  - intel-openmp=2025.3.0=h57928b3_642
-  - jinja2=3.1.6=pyhcf101f3_1
-  - khronos-opencl-icd-loader=2024.10.24=h2466b09_1
-  - krb5=1.21.3=hdf4eb48_0
-  - lcms2=2.18=hf2c6c5f_0
-  - lerc=4.0.0=h6470a55_1
-  - libblas=3.9.0=1_h8933c1f_netlib
-  - libcblas=3.9.0=13_hc41557d_netlib
-  - libclang13=21.1.8=default_ha2db4b5_2
+  - harfbuzz=12.3.2=h5a1b470_0
+  - icu=78.2=h637d24d_0
+  - idna=3.11=py310haa95532_0
+  - intel-openmp=2023.1.0=h59b6b97_46320
+  - jinja2=3.1.6=py310haa95532_0
+  - jpeg=9f=ha349fce_0
+  - khronos-opencl-icd-loader=2025.07.22=h79b28c9_0
+  - lcms2=2.16=hb4a4139_0
+  - lerc=3.0=hd77b12b_0
   - libcublas=12.4.5.8=0
   - libcublas-dev=12.4.5.8=0
   - libcufft=11.2.1.3=0
   - libcufft-dev=11.2.1.3=0
-  - libcurand=10.3.10.19=0
-  - libcurand-dev=10.3.10.19=0
+  - libcurand=10.4.1.81=hd7d98ca_0
+  - libcurand-dev=10.4.1.81=hd7d98ca_0
   - libcusolver=11.6.1.9=0
   - libcusolver-dev=11.6.1.9=0
   - libcusparse=12.3.1.170=0
   - libcusparse-dev=12.3.1.170=0
-  - libdeflate=1.25=h51727cc_0
+  - libdeflate=1.17=h2bbff1b_1
   - libexpat=2.7.3=h885b0b7_4
-  - libffi=3.5.2=h3d046cb_0
+  - libffi=3.4.4=hd77b12b_1
   - libfreetype=2.14.1=h57928b3_0
   - libfreetype6=2.14.1=hdbac1cb_0
-  - libglib=2.84.0=h7025463_0
-  - libhwloc=2.12.1=default_hfa10c62_1000
+  - libglib=2.86.3=h9bccc14_0
   - libiconv=1.18=hc1393d2_2
-  - libintl=0.22.5=h5728263_3
-  - libjpeg-turbo=3.1.2=hfd05255_0
-  - liblapack=3.9.0=13_h018ca30_netlib
-  - liblzma=5.8.2=hfd05255_0
-  - liblzma-devel=5.8.2=hfd05255_0
+  - libjpeg-turbo=2.0.0=h196d8e1_0
   - libnpp=12.2.5.30=0
   - libnpp-dev=12.2.5.30=0
-  - libnvfatbin=12.9.82=0
-  - libnvfatbin-dev=12.9.82=0
+  - libnvfatbin=13.1.115=hd7d98ca_0
+  - libnvfatbin-dev=13.1.115=hf56955b_0
   - libnvjitlink=12.4.127=0
   - libnvjitlink-dev=12.4.127=0
   - libnvjpeg=12.3.1.117=0
   - libnvjpeg-dev=12.3.1.117=0
-  - libpng=1.6.54=h7351971_0
-  - libsqlite=3.51.2=hf5d6505_0
-  - libtiff=4.7.1=h8f73337_1
-  - libuv=1.51.0=hfd05255_1
-  - libwebp=1.6.0=h4d5522a_0
-  - libwebp-base=1.6.0=h4d5522a_0
-  - libxcb=1.16=h013a479_1
+  - libopus=1.6.1=h6a83c73_0
+  - libpng=1.6.54=ha15c746_0
+  - libtiff=4.5.1=hd77b12b_0
+  - libuv=1.48.0=h827c3e9_0
+  - libwebp=1.3.2=hbc33d0d_0
+  - libwebp-base=1.3.2=h3d04722_1
   - libxml2=2.13.9=h741aa76_0
-  - libxslt=1.1.43=h25c3957_0
   - libzlib=1.3.1=h02ab6af_0
-  - m2w64-gcc-libgfortran=5.3.0=6
-  - m2w64-gcc-libs=5.3.0=7
-  - m2w64-gcc-libs-core=5.3.0=7
-  - m2w64-gmp=6.1.0=2
-  - m2w64-libwinpthread-git=5.0.0.4634.697f757=2
-  - markupsafe=3.0.3=py310hdb0e946_0
-  - mkl=2023.1.0=h6a75c08_48682
-  - mpmath=1.3.0=pyhd8ed1ab_1
-  - msys2-conda-epoch=20160418=1
-  - networkx=3.4.2=pyh267e887_2
-  - numpy=2.2.6=py310h4987827_0
-  - opencl-headers=2025.06.13=he0c23c2_0
-  - openjpeg=2.5.4=h24db6dd_0
+  - lz4-c=1.9.4=h2bbff1b_1
+  - markupsafe=3.0.2=py310h827c3e9_0
+  - mkl=2023.1.0=h6b88ed4_46358
+  - mkl-service=2.4.0=py310h827c3e9_2
+  - mkl_fft=1.3.11=py310h827c3e9_0
+  - mkl_random=1.2.8=py310hc64d2fc_0
+  - mpc=1.3.1=h827c3e9_0
+  - mpfr=4.2.1=h56c3642_0
+  - mpmath=1.3.0=py310haa95532_0
+  - networkx=3.4.2=py310haa95532_0
+  - numpy=2.0.1=py310h055cbcc_1
+  - numpy-base=2.0.1=py310h65a83cf_1
+  - opencl-headers=2025.07.22=h885b0b7_0
+  - openh264=2.4.1=h63175ca_0
+  - openjpeg=2.5.2=hae555c5_0
   - openssl=3.6.1=hf411b9b_1
   - packaging=25.0=py310haa95532_1
-  - pcre2=10.44=h99c9b8b_2
-  - pillow=10.4.0=py310h3e38d90_1
+  - pcre2=10.46=h3402e2f_0
+  - pillow=11.1.0=py310h096bfcc_0
   - pip=25.3=pyhc872135_0
   - pixman=0.46.4=h5112557_1
-  - pthread-stubs=0.4=hcd874cb_1001
-  - pyside6=6.8.1=py310h60c6385_0
-  - pysocks=1.7.1=pyh09c184e_7
-  - python=3.10.19=hc20f281_3_cpython
-  - python_abi=3.10=8_cp310
+  - pycparser=2.23=py310haa95532_0
+  - pysocks=1.7.1=py310haa95532_1
+  - python=3.10.19=h981015d_0
   - pytorch=2.5.1=py3.10_cuda12.4_cudnn9_0
   - pytorch-cuda=12.4=h3fd98bf_7
   - pytorch-mutex=1.0=cuda
-  - pyyaml=6.0.3=py310hdb0e946_0
-  - qt6-main=6.8.1=h1259614_2
-  - requests=2.32.5=pyhcf101f3_1
+  - pyyaml=6.0.3=py310hb9a58be_0
+  - requests=2.32.5=py310haa95532_1
   - setuptools=80.10.1=py310haa95532_0
   - sqlite=3.51.1=hda9a48d_0
-  - tbb=2021.13.0=hd094cb3_4
+  - svt-av1=2.2.1=he0c23c2_0
+  - tbb=2021.8.0=h59b6b97_0
   - tk=8.6.15=hf199647_0
-  - typing_extensions=4.15.0=pyhcf101f3_0
+  - typing_extensions=4.15.0=py310haa95532_0
   - tzdata=2025c=he532380_0
   - ucrt=10.0.22621.0=haa95532_0
-  - urllib3=2.6.3=pyhd8ed1ab_0
+  - urllib3=2.6.3=py310haa95532_0
   - vc=14.3=h2df5915_10
   - vc14_runtime=14.44.35208=h4927774_10
   - vs2015_runtime=14.44.35208=ha6b5a95_10
   - wheel=0.46.3=py310haa95532_0
-  - win_inet_pton=1.1.0=pyh7428d3b_8
-  - xorg-libxau=1.0.11=hcd874cb_0
-  - xorg-libxdmcp=1.1.3=hcd874cb_0
-  - xz=5.8.2=hb6c8415_0
-  - xz-tools=5.8.2=hfd05255_0
-  - yaml=0.2.5=h6a83c73_3
+  - win_inet_pton=1.1.0=py310haa95532_1
+  - x264=1!164.3095=h8ffe710_2
+  - x265=3.5=h2d74725_3
+  - xz=5.6.4=h4754444_1
+  - yaml=0.2.5=he774522_0
   - zlib=1.3.1=h02ab6af_0
-  - zstd=1.5.7=h534d264_6
+  - zstd=1.5.7=h56299aa_0
   - pip:
+      - annotated-doc==0.0.4
+      - annotated-types==0.7.0
       - antlr4-python3-runtime==4.9.3
-      - cffi==2.0.0
+      - anyio==4.12.1
+      - click==8.3.1
       - cloudpickle==3.1.2
       - colorama==0.4.6
       - darkdetect==0.7.1
@@ -160,7 +153,10 @@ dependencies:
       - demucs==4.0.1
       - dora-search==0.1.12
       - einops==0.8.2
+      - exceptiongroup==1.3.1
+      - fastapi==0.128.0
       - fsspec==2026.1.0
+      - h11==0.16.0
       - imageio==2.37.2
       - imageio-ffmpeg==0.6.0
       - julius==0.2.7
@@ -169,15 +165,24 @@ dependencies:
       - omegaconf==2.3.0
       - openunmix==1.3.0
       - proglog==0.1.12
-      - pycparser==3.0
+      - pydantic==2.12.5
+      - pydantic-core==2.41.5
       - pyqtdarktheme==2.1.0
+      - pyside6==6.8.1
+      - pyside6-addons==6.8.1
+      - pyside6-essentials==6.8.1
       - python-dotenv==1.2.1
+      - python-multipart==0.0.22
       - retrying==1.4.2
+      - shiboken6==6.8.1
       - soundfile==0.13.1
+      - starlette==0.50.0
       - submitit==1.5.4
       - sympy==1.13.1
       - torchaudio==2.5.1
       - torchvision==0.20.1
-      - tqdm==4.67.1
+      - tqdm==4.67.2
       - treetable==0.2.6
-prefix: C:\miniconda3\envs\karaoke
+      - typing-inspection==0.4.2
+      - uvicorn==0.40.0
+prefix: C:\ProgramData\miniconda3\envs\karaoke_pro

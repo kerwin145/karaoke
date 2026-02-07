@@ -1,18 +1,16 @@
-# Create the environment
-```conda create -n karaoke python=3.10 -y```
-```conda activate karaoke```
+# Create the env
+```conda env create -f environment.yml```
 
-# Set Strict Channel Priority (This is the magic fix)
-# This forces Conda to ONLY use one channel for a package even if another has a newer version
-```conda config --env --add channels conda-forge```
-```conda config --env --set channel_priority strict```
+or
 
-```conda install -c pytorch -c nvidia -c conda-forge pyside6=6.8.1 pytorch torchvision torchaudio pytorch-cuda=12.4 ffmpeg libffi -y```
+```conda env update --file environment.yml```
 
-# to test
-```python -c "import _ctypes; import torch; print('\n' + ' SUCCESS '.center(30, '=')); print(f'GPU: {torch.cuda.get_device_name(0)}'); print(f'Torch CUDA: {torch.version.cuda}'); print('='*30)"```
+# Running the thing
+## Backend
+cd backend
+conda activate karaoke_pro
+uvicorn main:app --reload
 
-# last remaining installs
-```pip install demucs pyqtdarktheme soundfile moviepy```
-
-Or just try using the install from the environment.yml
+# Frontend
+cd frontend
+& C:/ProgramData/miniconda3/envs/karaoke_pro/python.exe main.py
