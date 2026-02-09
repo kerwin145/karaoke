@@ -61,3 +61,13 @@ async def get_audio_file(song_name: str, track_type: str):
         raise HTTPException(status_code=404, detail="Audio track not found")
         
     return FileResponse(file_path, media_type="audio/wav")
+
+@app.get("/video/{song_name}")
+async def get_video_file(song_name: str):
+    # Locate the video.mp4 created in audio_processing.py
+    file_path = os.path.join(TRACK_ROOT, song_name, "video.mp4")
+    
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="Video file not found")
+        
+    return FileResponse(file_path, media_type="video/mp4")

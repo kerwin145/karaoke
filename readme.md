@@ -7,10 +7,12 @@ or
 
 # Running the thing
 ## Backend
-cd backend
-conda activate karaoke_pro
+(C:\miniconda3\shell\condabin\conda-hook.ps1) ; (conda activate karaoke_pro)
+cd .\backend\
 uvicorn main:app --reload
 
 # Frontend
 cd frontend
 & C:/ProgramData/miniconda3/envs/karaoke_pro/python.exe main.py
+or
+& C:/miniconda3/envs/karaoke_pro/python.exe main.py
