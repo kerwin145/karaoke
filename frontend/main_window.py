@@ -2,6 +2,7 @@ from PySide6.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QVBoxLayout,
                              QPushButton, QProgressBar, QLabel, QFileDialog, 
                              QListWidget, QSlider, QFrame, QStyle)
 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
+from PySide6.QtMultimediaWidgets import QVideoWidget
 from PySide6.QtCore import Qt, QThread, Signal, QUrl
 from api_client import upload_to_server, check_status, get_all_tracks, BASE_URL
 from components.ClickSlider import ClickSlider
@@ -103,6 +104,12 @@ class MainWindow(QMainWindow):
         self.vocal_vol = self.create_volume_slider("Vocal Volume", "vocal")
         self.inst_vol = self.create_volume_slider("Instrumental Volume", "inst")
         
+        ## Video 
+        self.video_widget = QVideoWidget()
+        self.video_widget.setMinimumHeight(400) # Give the video some space
+
+        ### Assemble
+        self.player_layout.insertWidget(0, self.video_widget) # Place video at the top
         self.player_layout.addStretch()
         self.player_layout.addWidget(self.song_title)
         self.player_layout.addLayout(self.controls_layout)
@@ -110,7 +117,7 @@ class MainWindow(QMainWindow):
         self.player_layout.addLayout(self.vocal_vol)
         self.player_layout.addLayout(self.inst_vol)
 
-        ### Setting up audio output
+        ### Setting up audio and video output
         self.vocal_player = QMediaPlayer()
         self.vocal_output = QAudioOutput()
         self.vocal_player.setAudioOutput(self.vocal_output)
@@ -118,6 +125,9 @@ class MainWindow(QMainWindow):
         self.inst_player = QMediaPlayer()
         self.inst_output = QAudioOutput()
         self.inst_player.setAudioOutput(self.inst_output)
+
+        self.video_player = QMediaPlayer()
+        self.video_player.setVideoOutput(self.video_widget)
 
         ### Connect players to the seeker. We use inst_player as the "master" for timing
         self.inst_player.positionChanged.connect(self.update_position)
@@ -159,12 +169,15 @@ class MainWindow(QMainWindow):
         # Construct URLs to the backend static mount
         vocal_url = f"{BASE_URL}/audio/{song_name}/vocals.wav"
         inst_url = f"{BASE_URL}/audio/{song_name}/no_vocals.wav"
-        
+        video_url = f"{BASE_URL}/video/{song_name}"
+
         self.vocal_player.setSource(QUrl(vocal_url))
         self.inst_player.setSource(QUrl(inst_url))
+        self.video_player.setSource(QUrl(video_url))
 
         self.vocal_player.play()
         self.inst_player.play()
+        self.video_player.play()
 
     def refresh_ui_list(self):
         tracks = get_all_tracks() # using the new api_client function
@@ -179,9 +192,11 @@ class MainWindow(QMainWindow):
         if self.inst_player.playbackState() == QMediaPlayer.PlayingState:
             self.vocal_player.pause()
             self.inst_player.pause()
+            self.video_player.pause()
         else:
             self.vocal_player.play()
             self.inst_player.play()
+            self.video_player.play()
 
     def update_buttons(self, state):
         # Changes icon based on whether the music is moving or not
@@ -202,6 +217,7 @@ class MainWindow(QMainWindow):
         # Allows user to click/drag slider to change time for BOTH tracks
         self.vocal_player.setPosition(position)
         self.inst_player.setPosition(position)
+        self.video_player.setPosition(position)
 
     # For asynchronous video uploading 
     def handle_start(self):
