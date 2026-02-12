@@ -2,6 +2,8 @@
 tracks_temp/*
 
 # output of demucs
-karaoke_output/* 
+backend/karaoke_output/* 
 
-__pycache__
+__pycache__/
+backend/__pycache__
+frontend/__pycache__
