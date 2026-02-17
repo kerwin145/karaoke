@@ -8,6 +8,7 @@ or
 # Running the thing
 ## Backend
 (C:\miniconda3\shell\condabin\conda-hook.ps1) ; (conda activate karaoke_pro)
+(C:\ProgramData\miniconda3\shell\condabin\conda-hook.ps1) ; (conda activate karaoke_pro)
 cd .\backend\
 uvicorn main:app --reload
 

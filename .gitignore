@@ -5,6 +5,3 @@ tracks_temp/*
 backend/karaoke_output/* 
 
 __pycache__/
-backend/__pycache__
-frontend/__pycache__
-frontend/components/__pycache__

@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QSlider, QApplication, QStyle
-from PySide6.QtCore import Qt, QEvent
+from PySide6.QtWidgets import QSlider, QStyle
+from PySide6.QtCore import Qt
 
 class ClickSlider(QSlider):
     def __init__(self, parent=None):
