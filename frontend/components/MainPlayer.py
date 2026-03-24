@@ -35,10 +35,18 @@ class MainPlayer(QFrame):
         ## Volume Controls
         self.vocal_vol = self.create_volume_slider("Vocal Volume", "vocal")
         self.inst_vol = self.create_volume_slider("Instrumental Volume", "inst")
-        
+
         ## Video 
         self.video_widget = QVideoWidget()
         self.video_widget.setMinimumHeight(400) # Give the video some space
+
+        ## Add lyrics
+        self.toggle_add_lyrics = QPushButton()
+        self.toggle_add_lyrics.setText("Add lyrics")
+
+        ##
+        self.footer = QHBoxLayout()
+        self.footer.addWidget(self.toggle_add_lyrics)
 
         ### Assemble
         self.player_layout.insertWidget(0, self.video_widget) # Place video at the top
@@ -48,6 +56,7 @@ class MainPlayer(QFrame):
         self.player_layout.addStretch()
         self.player_layout.addLayout(self.vocal_vol)
         self.player_layout.addLayout(self.inst_vol)
+        self.player_layout.addLayout(self.footer)
 
         ### Setting up audio and video output
         self.vocal_player = QMediaPlayer()

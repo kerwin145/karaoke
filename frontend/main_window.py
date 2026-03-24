@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QLabel)
 
-from components import TrackListWidget, AddSongWidget, MainPlayer
+from components import TrackListWidget, AddSongWidget, MainPlayer, AddLyricsWidget
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -16,7 +16,6 @@ class MainWindow(QMainWindow):
         self.left_column = QVBoxLayout()
 
         self.track_list = TrackListWidget()
-
         self.add_song_widget = AddSongWidget(self.track_list)
         
         self.left_column.addWidget(QLabel("Available Tracks"))
@@ -24,10 +23,12 @@ class MainWindow(QMainWindow):
         self.left_column.addWidget(self.add_song_widget)
 
         # RIGHT COLUMN 3/4 width
-        self.right_column = QVBoxLayout()
+        self.right_column = QHBoxLayout()
 
         self.player_frame = MainPlayer()
         self.right_column.addWidget(self.player_frame)
+        self.add_lyrics_widget = AddLyricsWidget()
+        self.right_column.addWidget(self.add_lyrics_widget)
 
         # COMBINED LAYOUT
         self.main_layout.addLayout(self.left_column, 1)
@@ -35,6 +36,7 @@ class MainWindow(QMainWindow):
 
         # add connectors
         self.track_list.track_selected.connect(self.player_frame.load_track)
+        self.player_frame.toggle_add_lyrics.clicked.connect(self.add_lyrics_widget.toggle)
 
         # INITIALIZE CONTENT
         self.track_list.refresh() # api call
