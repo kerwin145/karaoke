@@ -11,7 +11,7 @@ class AddLyricsWidget(QWidget):
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(8, 8, 8, 8)
-        layout.addWidget(QLabel("Add Lyrics"))
+        layout.addWidget(QLabel("Submit Lyrics"))
 
         self.text_box = QPlainTextEdit()
         self.text_box.setPlaceholderText("Paste or type lyrics here...")
@@ -32,6 +32,15 @@ class AddLyricsWidget(QWidget):
         self._anim.setStartValue(self.maximumWidth())
         self._anim.setEndValue(250 if self._panel_open else 0)
         self._anim.start()
+
+    def toggle_set(self, open):
+        self._anim.setStartValue(self.maximumWidth())
+        if open: # if T
+            self._anim.setEndValue(250)
+        else:
+            self._anim.setEndValue(0)
+        self._anim.start()
+        self._panel_open = open
 
     def _on_submit(self):
         text = self.text_box.toPlainText().strip()

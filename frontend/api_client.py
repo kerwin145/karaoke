@@ -3,7 +3,7 @@ import requests
 BASE_URL = "http://127.0.0.1:8000"
 
 def upload_to_server(file_path):
-    url = f"{BASE_URL}/upload"
+    url = f"{BASE_URL}/upload_track"
     with open(file_path, 'rb') as f:
         files = {'file': f}
         response = requests.post(url, files=files)
@@ -23,3 +23,12 @@ def get_all_tracks():
     except requests.exceptions.RequestException as e:
         print(f"Connection Error: {e}")
         return [] # Return empty list so the UI doesn't crash
+    
+def get_lyrics(song_name):
+    try:
+        response = requests.get(f"{BASE_URL}/lyrics/{song_name}")
+        return response
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Connection Error: {e}")
+        return []

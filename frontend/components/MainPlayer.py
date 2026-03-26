@@ -5,7 +5,7 @@ from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
 from PySide6.QtMultimediaWidgets import QVideoWidget
 
 from components import ClickSlider 
-from api_client import BASE_URL
+from api_client import BASE_URL, get_lyrics
 
 class MainPlayer(QFrame):
     def __init__(self, parent=None):
@@ -42,7 +42,8 @@ class MainPlayer(QFrame):
 
         ## Add lyrics
         self.toggle_add_lyrics = QPushButton()
-        self.toggle_add_lyrics.setText("Add lyrics")
+        self.toggle_add_lyrics.setText("Add lyrics (please select song first)")
+        self.toggle_add_lyrics.setEnabled(False)
 
         ##
         self.footer = QHBoxLayout()
@@ -95,6 +96,14 @@ class MainPlayer(QFrame):
         
     def load_track(self, song_name):
         self.song_title.setText(f"Playing: {song_name}")
+
+        self.toggle_add_lyrics.setEnabled(True)
+        lyrics = get_lyrics(song_name).json()
+        print(lyrics)
+        if lyrics is not None:
+            self.toggle_add_lyrics.setText("Update Lyrics")
+        else:
+            self.toggle_add_lyrics.setText("Add Lyrics")
         
         # Construct URLs to the backend static mount
         vocal_url = f"{BASE_URL}/audio/{song_name}/vocals.wav"

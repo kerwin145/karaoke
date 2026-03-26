@@ -16,4 +16,5 @@ uvicorn main:app --reload
 cd frontend
 & C:/ProgramData/miniconda3/envs/karaoke_pro/python.exe main.py
 or
+cd frontend
 & C:/miniconda3/envs/karaoke_pro/python.exe main.py

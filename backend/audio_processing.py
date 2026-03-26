@@ -4,6 +4,10 @@ import torch
 import shutil
 import sys
 from moviepy import VideoFileClip
+import whisperx
+import json
+from pathlib import Path
+from util import TRACK_ROOT
 
 def run_karaoke_process(video_path, task_id, original_file_name, output_base_dir="karaoke_output"):
     video_name_no_ext = os.path.splitext(original_file_name)[0]
@@ -90,3 +94,50 @@ def run_karaoke_process(video_path, task_id, original_file_name, output_base_dir
         # 2. Remove the nested 'htdemucs_ft' directory entirely
         if os.path.exists(ht_root):
             shutil.rmtree(ht_root, ignore_errors=True)
+
+def run_lyrics_alignment_process(song_name: str, lyrics:str, language_code:str):
+    song_dir = os.path.join(TRACK_ROOT, song_name)
+    if not os.path.isdir(song_dir):
+        msg = f"Song directory not found: {song_dir}"
+        print(msg)
+        return False, msg
+
+    audio_path = os.path.join(song_dir, "vocals.wav")
+    if not os.path.isfile(audio_path):
+        msg = f"Vocals file not found: {audio_path}. Has the track been split yet?"
+        print(msg)
+        return False, msg
+    
+    # save the raw lyrics. we're gonna serve this too
+    lyrics_raw_path = os.path.join(song_dir, "lyrics_raw.txt")
+    with open(lyrics_raw_path, "w", encoding="utf-8") as f:
+        f.write(lyrics)
+
+    align_model, metadata = whisperx.load_align_model(
+        language_code=language_code,
+        device="cuda"
+    )
+    segments = [{"text": lyrics}]
+    audio = whisperx.load_audio(audio_path)
+
+    result = whisperx.align(
+        segments,
+        align_model,
+        metadata,
+        audio,
+        device="cuda"
+    )
+
+    alignment_data = {
+        "audio_path": audio_path,
+        "language": language_code,
+        "word_segments": result["word_segments"]
+    }
+
+    output_path = os.path.join(song_dir, "alignment.json")
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(alignment_data, f, ensure_ascii=False, indent=2)
+
+    debug_msg = f"Saved {len(result['word_segments'])} word segments to {output_path}"
+    print(debug_msg)
+    return True, debug_msg
